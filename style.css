@@ -1,0 +1,96 @@
+:root {
+  --main-bg-color: black;
+  --main-color: white;
+}
+
+body {
+position: fixed;
+top: 0;
+left: 0;
+min-width: 100%;
+min-height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: var(--main-bg-color);
+}
+
+#app {
+  background-color: var(--main-bg-color);
+  color: var(--main-color);
+}
+
+#gaming-table {
+  cursor: pointer;
+}
+
+#gaming-table td {
+  width: 200px;
+  height: 200px;
+  font-size: 170px;
+  text-align: center;
+}
+
+.border-right {
+  border-right: 4px solid var(--main-color);
+}
+
+.border-left {
+  border-left: 4px solid var(--main-color);
+}
+
+.border-top {
+  border-top: 4px solid var(--main-color);
+}
+
+.border-bottom {
+  border-bottom: 4px solid var(--main-color);
+}
+
+
+#statistics {
+  margin: auto;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+#statistics:hover i {
+  color: var(--main-color);
+}
+
+#statistics td {
+  margin-top: 100px;
+  width: 100px;
+  text-align: center;
+  margin-right: 15px;
+}
+
+.statistics-head td {
+    font-size: 20px;
+}
+
+.statistics-bottom td {
+  font-size: 40px
+}
+
+.fa-user {
+  color: grey;
+  font-size: 30px !important;
+}
+
+.user-td {
+  margin-top: 100px;
+}
+
+.user-td * {
+  display: block;
+}
+
+.statistics-bottom:last-child {
+  font-size: 25px !important;
+}
+
+/* for animations */
+.hide-element i, span{
+  display: none;
+}
