@@ -5,7 +5,7 @@
     <title>Tic-Tac-Toe Game </title>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="./app.js"></script>
+    <script src="./app.js" defer></script>
   </head>
   <body>
 
@@ -34,16 +34,16 @@
     <table id="statistics">
       <tr class="statistics-head">
         <td>PLAYER(x)</td>
-        <td>TIE</td>
+        <td>GAME</td>
         <td>COMPUTER(o)</td>
         <td class="user-td">
           <i class="fa fa-user" aria-hidden="true"></i>
         </td>
       </tr>
       <tr class="statistics-bottom">
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
+        <td id="playerOne_score">0</td>
+        <td id="game_number">0</td>
+        <td id="playerTwo_score">0</td>
         <td class="text-small">1P</td>
       </tr>
     </table>
