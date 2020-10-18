@@ -110,7 +110,9 @@ function makeMove(positionID) {
       if (isItWin(player1) === true) {
         increaseScore(PLAYER_ONE_SCORE);
         increaseScore(GAME_NUMBER);
-        resetGamingBoard();
+        setTimeout(function() {
+            resetGamingBoard();
+        }, 2000);
         return;
       }
       switchPlayer();
@@ -126,8 +128,8 @@ function makeMove(positionID) {
     else if (isPlayerOneMoving === false) {
       document.getElementById(positionID).innerHTML = O;
       updateBoardInfo(player2, positionID);
-      if (isItWin(player1) === true) {
-        increaseScore(PLAYER_ONE_SCORE);
+      if (isItWin(player2) === true) {
+        increaseScore(PLAYER_TWO_SCORE);
         increaseScore(GAME_NUMBER);
         resetGamingBoard();
         return;
@@ -144,6 +146,19 @@ function resetGamingBoard() {
   for (var i = 0; i < allGamingCells.length; i++) {
     allGamingCells[i].innerHTML="";
   }
+
+  for (var key in player1) {
+    if (player1.hasOwnProperty(key)) {
+        player1[key] = 0;
+    }
+  }
+
+  for (var key in player2) {
+    if (player2.hasOwnProperty(key)) {
+        player2[key] = 0;
+    }
+  }
+
 }
 
 
