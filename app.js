@@ -15,38 +15,9 @@ for (let i = 0; i < allGamingCells.length; i++) {
     })
 }
 
-/*
-0 X X X
-1
-2
-*/
 
 
 
-function checkRowWinner(positionID) {
-  let parent = document.getElementById(positionID).parentElement;
-  if (parent.children[0].innerHTML == parent.children[1].innerHTML && parent.children[0].innerHTML == parent.children[2].innerHTML) {
-    console.log("SOMEONE WON!");
-  }
-}
-
-
-function checkColumnlWinner(positionID) {
-var getRowPosition;
-var getColPosition;
-
-var rowArr = [];
-var colArr = [];
-
-var row1 = document.getElementById("gaming-table").children[0].children[0];
-var row2 = document.getElementById("gaming-table").children[0].children[1];
-var row3 = document.getElementById("gaming-table").children[0].children[2];
-
-console.log(row1.children[0].innerHTML);
-
-}
-
-checkColumnlWinner("0");
 
 function checkWin() {
 
