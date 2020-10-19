@@ -131,7 +131,9 @@ function makeMove(positionID) {
       if (isItWin(player2) === true) {
         increaseScore(PLAYER_TWO_SCORE);
         increaseScore(GAME_NUMBER);
-        resetGamingBoard();
+        setTimeout(function() {
+            resetGamingBoard();
+        }, 2000);
         return;
       }
       switchPlayer(player2);
