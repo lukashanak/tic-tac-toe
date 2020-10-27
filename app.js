@@ -15,9 +15,8 @@ for (let i = 0; i < allGamingCells.length; i++) {
     })
 }
 
-// make a move, based on the position of the <td> by ID
-var isPlayerOneMoving = true; // or 'O'
 
+var isPlayerOneMoving = true;
 function switchPlayer() {
   if (isPlayerOneMoving === true) {
     isPlayerOneMoving = false;
@@ -58,27 +57,13 @@ function updateBoardInfo(player, cellID) {
   player["row"+rowIndex]+=1;
   player["col"+colIndex]+=1;
 
-
-
   if (cellID == 0 || cellID == 4 || cellID == 8) {
     player.diag0+=1;
     console.log(player.diag0);
   }
-
   if (cellID == 2 || cellID == 4 || cellID == 6) {
     player.diag1+=1;
     console.log(player.diag1);
-  }
-
-}
-
-
-function activePlayer() {
-  if (isPlayerOneMoving === true) {
-    return "Player one";
-  }
-  else {
-    return "Player two"
   }
 }
 
@@ -86,7 +71,6 @@ function isItWin(player) {
   for (var key in player) {
     if (player.hasOwnProperty(key)) {
         if (player[key] == 3) {
-          console.log(activePlayer() + " WIN!");
           return true;
         }
     }
@@ -119,7 +103,7 @@ function makeMove(positionID) {
 
       /*
       if (singlePlayerMode === true) {
-        makeComputerMove();
+        makeComputerMove();activePlayer()
       }
       */
     }
@@ -129,6 +113,7 @@ function makeMove(positionID) {
       document.getElementById(positionID).innerHTML = O;
       updateBoardInfo(player2, positionID);
       if (isItWin(player2) === true) {
+
         increaseScore(PLAYER_TWO_SCORE);
         increaseScore(GAME_NUMBER);
         setTimeout(function() {
