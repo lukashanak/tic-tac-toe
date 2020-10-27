@@ -27,19 +27,7 @@ function switchPlayer() {
 }
 
 // board info - player1
-var player1 = {
-  row0: 0,
-  row1: 0,
-  row2: 0,
-  col0: 0,
-  col1: 0,
-  col2: 0,
-  diag0: 0,
-  diag1: 0
-}
-
-// board info - player1
-var player2 = {
+var boardInfo = {
   row0: 0,
   row1: 0,
   row2: 0,
