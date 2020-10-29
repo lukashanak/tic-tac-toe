@@ -26,8 +26,7 @@ function switchPlayer() {
   }
 }
 
-// board info - player1
-var boardInfo = {
+let boardInfo = {
   row0: 0,
   row1: 0,
   row2: 0,
@@ -38,27 +37,38 @@ var boardInfo = {
   diag1: 0
 }
 
-function updateBoardInfo(player, cellID) {
+function updateBoardInfo(cellID) {
   var rowIndex = document.getElementById(cellID).closest('tr').rowIndex;
   var colIndex = document.getElementById(cellID).cellIndex;
 
-  player["row"+rowIndex]+=1;
-  player["col"+colIndex]+=1;
+  increaseOrDecreaseByOne(["row"+rowIndex]);
+  increaseOrDecreaseByOne(["col"+colIndex]);
 
   if (cellID == 0 || cellID == 4 || cellID == 8) {
-    player.diag0+=1;
-    console.log(player.diag0);
+    increaseOrDecreaseByOne("diag0");
   }
   if (cellID == 2 || cellID == 4 || cellID == 6) {
-    player.diag1+=1;
-    console.log(player.diag1);
+    increaseOrDecreaseByOne("diag1");
   }
 }
 
-function isItWin(player) {
-  for (var key in player) {
-    if (player.hasOwnProperty(key)) {
-        if (player[key] == 3) {
+function increaseOrDecreaseByOne(property)  {
+  if (isPlayerOneMoving === true) {
+      boardInfo[property]+=1;
+      console.log("increased");
+  }
+  else {
+    boardInfo[property]-=1;
+  }
+}
+
+increaseOrDecreaseByOne("row0");
+
+
+function isItWin() {
+  for (var key in boardInfo) {
+    if (boardInfo.hasOwnProperty(key)) {
+        if (boardInfo[key] == 3) {
           return true;
         }
     }
@@ -66,8 +76,8 @@ function isItWin(player) {
 }
 
 
-function makeMove(positionID) {
-  if (document.getElementById(positionID).innerHTML !== "") {
+function makeMove(cellID) {
+  if (document.getElementById(cellID).innerHTML !== "") {
     console.log("cell is not empty");
     return 0;
   }
@@ -77,9 +87,9 @@ function makeMove(positionID) {
 
     // WHEN THE FIRST PLAYER IS ON THE MOVE
     if (isPlayerOneMoving === true) {
-      document.getElementById(positionID).innerHTML = X;
-      updateBoardInfo(player1, positionID);
-      if (isItWin(player1) === true) {
+      document.getElementById(cellID).innerHTML = X;
+      updateBoardInfo(cellID);
+      if (isItWin() === true) {
         increaseScore(PLAYER_ONE_SCORE);
         increaseScore(GAME_NUMBER);
         setTimeout(function() {
@@ -98,9 +108,9 @@ function makeMove(positionID) {
 
     // WHEN THE SECOND PLAYER IS ON THE MOVE
     else if (isPlayerOneMoving === false) {
-      document.getElementById(positionID).innerHTML = O;
-      updateBoardInfo(player2, positionID);
-      if (isItWin(player2) === true) {
+      document.getElementById(cellID).innerHTML = O;
+      updateBoardInfo(cellID);
+      if (isItWin() === true) {
 
         increaseScore(PLAYER_TWO_SCORE);
         increaseScore(GAME_NUMBER);
@@ -109,7 +119,7 @@ function makeMove(positionID) {
         }, 2000);
         return;
       }
-      switchPlayer(player2);
+      switchPlayer();
     }
 
   }
