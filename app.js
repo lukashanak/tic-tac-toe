@@ -15,17 +15,22 @@ for (let i = 0; i < allGamingCells.length; i++) {
     })
 }
 
-
-var isPlayerOneMoving = true;
+// get info about who is currently playing and switch it if needed
+let isPlayerOneMoving = true;
+let isPlayerTwoMoving = false;
 function switchPlayer() {
   if (isPlayerOneMoving === true) {
     isPlayerOneMoving = false;
+    isPlayerTwoMoving = true
   }
   else {
     isPlayerOneMoving = true;
+    isPlayerTwoMoving = false;
   }
 }
 
+
+// track board info and update it when needed
 let boardInfo = {
   row0: 0,
   row1: 0,
@@ -37,6 +42,8 @@ let boardInfo = {
   diag1: 0
 }
 
+
+// I hate these two functions, they are messy
 function updateBoardInfo(cellID) {
   var rowIndex = document.getElementById(cellID).closest('tr').rowIndex;
   var colIndex = document.getElementById(cellID).cellIndex;
@@ -52,7 +59,7 @@ function updateBoardInfo(cellID) {
   }
 }
 
-function increaseOrDecreaseByOne(property)  {
+function increaseOrDecreaseNumberByOne(property)  {
   if (isPlayerOneMoving === true) {
       boardInfo[property]+=1;
       console.log("increased");
@@ -62,9 +69,9 @@ function increaseOrDecreaseByOne(property)  {
   }
 }
 
-increaseOrDecreaseByOne("row0");
 
 
+//
 function isItWin() {
   for (var key in boardInfo) {
     if (boardInfo.hasOwnProperty(key)) {
@@ -121,6 +128,28 @@ function makeMove(cellID) {
       }
       switchPlayer();
     }
+
+  }
+}
+
+
+function isCellEmpty(cellID) {
+  return document.getElementById(cellID).innerHTML !== "";
+}
+
+function markCell(cellID){
+  let X = '<i class="fa fa-times" aria-hidden="true"></i>';
+  let O = '<span>O</span>';
+
+  document.getElementById(cellID).innerHTML;
+}
+
+function makeMovee(cellID) {
+  if (isCellEmpty(cellID) == false) { return; }
+  if (isPlayerOneMoving === true) {
+     document.getElementById(cellID).innerHTML;
+  }
+  else {
 
   }
 }
