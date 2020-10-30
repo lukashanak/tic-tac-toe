@@ -102,12 +102,9 @@ let suspendedGame = false;
 function makeMove(cellID) {
   if (isCellEmpty(cellID) == false) { return }
   if (suspendedGame == true) { return }
-
-  if (isPlayerOneMoving === true) {
      markCell(cellID);
      updateBoardInfo(cellID);
      if (isItWin() === true) {
-       console.log("player one won!");
        updateBoardInfo(cellID);
        updateStatistics();
        suspendedGame = true;
@@ -118,25 +115,7 @@ function makeMove(cellID) {
        return;
      }
      switchPlayer();
-  }
-  else {
-    markCell(cellID);
-    updateBoardInfo(cellID);
-    if (isItWin() === true) {
-      console.log("player two won!");
-      updateBoardInfo(cellID);
-      updateStatistics();
-      suspendedGame = true;
-      setTimeout(function() {
-          resetGamingBoard();
-          suspendedGame = false;
-      }, 2000);
-      return;
-    }
-    switchPlayer();
-  }
 }
-
 
 
 function resetGamingBoard() {
