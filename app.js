@@ -50,6 +50,15 @@ function isItWin() {
 }
 }
 
+function isItDraw(){
+  isEveryCellFull = true;
+  for (let i = 0; i < allGamingCells.length; i++) {
+    if (allGamingCells[i].innerHTML == "")
+    isEveryCellFull = false;
+  }
+  return isEveryCellFull;
+}
+
 // UPDATE THE STATE OF THE BOARDINFO OBJECT
 function updateBoardInfo(cellID) {
   let rowIndex = document.getElementById(cellID).closest('tr').rowIndex;
@@ -109,10 +118,13 @@ function makeMove(cellID) {
        }, 2000);
        return;
      }
+     if(isItDraw() === true) { return }
      switchPlayer();
 
      if (singlePlayerMode === true && isPlayerTwoMoving === true) {
-      makeMove(getIdOfNotUsedCell());
+       setTimeout(function(){
+        makeMove(getIdOfNotUsedCell());
+      },100);
      }
 
 }
