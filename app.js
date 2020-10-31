@@ -6,6 +6,24 @@ for (let i = 0; i < allGamingCells.length; i++) {
     })
 }
 
+const playerSwitcherTop = document.getElementById("playerSwitcherTop");
+const playerSwitcherBottom = document.getElementById("playerSwitcherBottom");
+
+playerSwitcherTop.addEventListener('click', () => {
+   switchMode();
+})
+
+playerSwitcherBottom.addEventListener('click', () => {
+   switchMode();
+})
+
+// SWITCH PLAYER MODES - SINGLE PLAYER AND MULTIPLAYER
+let singlePlayerMode = true;
+function switchMode() {
+  singlePlayerMode = !singlePlayerMode;
+
+}
+
 // DOM ELEMENTS - STATISCTICS
 const PLAYER_ONE_SCORE = document.getElementById("playerOne_score");
 const GAME_NUMBER = document.getElementById("game_number");
@@ -50,6 +68,7 @@ function isItWin() {
 }
 }
 
+// DETERMINE IF IT IS A DRAW
 function isItDraw(){
   isEveryCellFull = true;
   for (let i = 0; i < allGamingCells.length; i++) {
@@ -113,12 +132,17 @@ function makeMove(cellID) {
        updateStatistics();
        suspendedGame = true;
        setTimeout(function() {
-           resetGamingBoard();
+           resetGame();
            suspendedGame = false;
        }, 2000);
        return;
      }
-     if(isItDraw() === true) { return }
+     if(isItDraw() === true) {
+      GAME_NUMBER.innerHTML+=1;
+      setTimeout(function(){
+        resetGame();
+      },2)
+      return }
      switchPlayer();
 
      if (singlePlayerMode === true && isPlayerTwoMoving === true) {
@@ -126,7 +150,6 @@ function makeMove(cellID) {
         makeMove(getIdOfNotUsedCell());
       },100);
      }
-
 }
 
 // GENERATE RANDOM ID OF NOT USED CELL
@@ -138,14 +161,8 @@ function getIdOfNotUsedCell(){
   return randomCellId;
 }
 
-function makeComputerMove() {
-  let randomNumber = (Math.random() * 8).toFixed(0);
-  while(markCell(randomNumber) == 0) {
-    randomNumber = (Math.random() * 8).toFixed(0);
-  }
-}
-
-function resetGamingBoard() {
+// RESET GAME
+function resetGame() {
   isPlayerOneMoving = true;
   isPlayerTwoMoving = false;
   for (var i = 0; i < allGamingCells.length; i++) {
@@ -160,15 +177,35 @@ function resetGamingBoard() {
 }
 
 
-var singlePlayerMode = true;
-function switchMode() {
-  singlePlayerMode = !singlePlayerMode;
+let blinkElement = (elementId) => {
+  let element = document.getElementById(elementId);
+
+  setTimeout(function() {
+    element.classList.add("hide-element");
+    console.log("part 0");
+}, 500);
+
+  setTimeout(function() {
+    element.classList.remove("hide-element");
+    console.log("part 1");
+}, 1000);
+
+setTimeout(function() {
+  element.classList.add("show-element");
+      console.log("part 2");
+}, 1500);
+
+setTimeout(function() {
+  element.classList.remove("hide-element");
+      console.log("part 3");
+}, 2000);
+
 }
 
-/*
-function blinkingAnimation(className) {
-  let element = document.getElementsByClassName(className);
-  console.log(element.length);
-  // element.classList.add("hide-element");
+blinkElement("playerSwitcherTop");
+
+
+function blinkSubElements(elementId) {
+  let element = document.getElementById(elementId);
+  element.classList.add("hide-element");
 }
-*/

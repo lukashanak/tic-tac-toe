@@ -91,6 +91,10 @@ background-color: var(--main-bg-color);
 }
 
 /* for blicking animation (not for a border) */
-.hide-element i, .hide-element span{
+.hide-sub-elements i, .hide-element span{
+  display: none;
+}
+
+.hide-element {
   display: none;
 }
