@@ -55,37 +55,29 @@ function updateBoardInfo(cellID) {
   let rowIndex = document.getElementById(cellID).closest('tr').rowIndex;
   let colIndex = document.getElementById(cellID).cellIndex;
 
-  increaseOrDecreaseNumberByOne([`row{rowIndex}`]);
-  increaseOrDecreaseNumberByOne([`col{colIndex}`]);
+  plusOrMinusOnObject('row'+rowIndex);
+  plusOrMinusOnObject('col'+colIndex);
 
-/*
-  if (isPlayerOneMoving === true) {
-
-  }
-  else {
-
-   }
-   */
-
-  if (cellID == 0 || cellID == 4 || cellID == 8) { increaseOrDecreaseNumberByOne("diag0") }
-  if (cellID == 2 || cellID == 4 || cellID == 6) { increaseOrDecreaseNumberByOne("diag1") }
+  if (cellID == 0 || cellID == 4 || cellID == 8) { plusOrMinusOnObject("diag0") }
+  if (cellID == 2 || cellID == 4 || cellID == 6) { plusOrMinusOnObject("diag1") }
 }
 
-// DECREASE OR INCREASE THE N
-function increaseOrDecreaseNumberByOne(property)  {
+// ADD ONE OR SUBSTRACT 1 FROM THE OBJECT PROPERTY, BASED ON ACTIVE PLAYER
+function plusOrMinusOnObject(property)  {
   if (isPlayerOneMoving === true) {
-      boardInfo[property]+=1;
-  }
+     boardInfo[property]+=1;
+    }
   else {
-    boardInfo[property]-=1;
-  }
+     boardInfo[property]-=1;
+    }
 }
 
-
+// GET INFO IF THE CELL IS EMPTY
 function isCellEmpty(cellID) {
   return document.getElementById(cellID).innerHTML == "";
 }
 
+// MARK THE CELL WITH X OR O, BASED ON THE CURRENTLY MOVING PLAYER
 function markCell(cellID){
   let playerOneChar = '<i class="fa fa-times" aria-hidden="true"></i>';
   let playerTwoChar = '<span>O</span>';
@@ -98,8 +90,10 @@ function markCell(cellID){
   }
 }
 
+
 let suspendedGame = false;
 
+// MAKE A MOVE - WHEN THE USER CLICK TO THE CELL
 function makeMove(cellID) {
   if (isCellEmpty(cellID) == false) { return }
   if (suspendedGame == true) { return }
@@ -115,12 +109,29 @@ function makeMove(cellID) {
        }, 2000);
        return;
      }
-     switchPlayer()
-     if (singlePlayerMode === true) {
-       makeComputerMove();
+     switchPlayer();
+
+     if (singlePlayerMode === true && isPlayerTwoMoving === true) {
+      makeMove(getIdOfNotUsedCell());
      }
+
 }
 
+// GENERATE RANDOM ID OF NOT USED CELL
+function getIdOfNotUsedCell(){
+  let randomCellId = (Math.random() * 8).toFixed(0);
+  while (document.getElementById(randomCellId).innerHTML !== "") {
+    randomCellId = (Math.random() * 8).toFixed(0);
+  }
+  return randomCellId;
+}
+
+function makeComputerMove() {
+  let randomNumber = (Math.random() * 8).toFixed(0);
+  while(markCell(randomNumber) == 0) {
+    randomNumber = (Math.random() * 8).toFixed(0);
+  }
+}
 
 function resetGamingBoard() {
   isPlayerOneMoving = true;
@@ -136,13 +147,6 @@ function resetGamingBoard() {
   }
 }
 
-
-function makeComputerMove() {
-  let randomNumber = (Math.random() * 8).toFixed(0);
-  while(markCell(randomNumber) == 0) {
-    randomNumber = (Math.random() * 8).toFixed(0);
-  }
-}
 
 var singlePlayerMode = true;
 function switchMode() {
