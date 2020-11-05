@@ -10,18 +10,30 @@ const playerSwitcherTop = document.getElementById("playerSwitcherTop");
 const playerSwitcherBottom = document.getElementById("playerSwitcherBottom");
 
 playerSwitcherTop.addEventListener('click', () => {
-   switchMode();
+   switchMode_DOM();
+   switchMode_JS();
 })
 
 playerSwitcherBottom.addEventListener('click', () => {
-   switchMode();
+   switchMode_DOM();
+   switchMode_JS();
 })
 
 // SWITCH PLAYER MODES - SINGLE PLAYER AND MULTIPLAYER
 let singlePlayerMode = true;
-function switchMode() {
+function switchMode_JS() {
   singlePlayerMode = !singlePlayerMode;
+}
 
+function switchMode_DOM() {
+  if (singlePlayerMode === true) {
+    playerSwitcherTop.innerHTML = '<i class="fa fa-user" aria-hidden="true"></i>';
+    playerSwitcherBottom.innerHTML = '1P';
+  }
+  else {
+    playerSwitcherTop.innerHTML = '<i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i>';
+    playerSwitcherBottom.innerHTML = '2P';
+  }
 }
 
 // DOM ELEMENTS - STATISCTICS
@@ -88,6 +100,7 @@ function updateBoardInfo(cellID) {
 
   if (cellID == 0 || cellID == 4 || cellID == 8) { plusOrMinusOnObject("diag0") }
   if (cellID == 2 || cellID == 4 || cellID == 6) { plusOrMinusOnObject("diag1") }
+  console.log('board updated!');
 }
 
 // ADD ONE OR SUBSTRACT 1 FROM THE OBJECT PROPERTY, BASED ON ACTIVE PLAYER
@@ -128,7 +141,6 @@ function makeMove(cellID) {
      markCell(cellID);
      updateBoardInfo(cellID);
      if (isItWin() === true) {
-       updateBoardInfo(cellID);
        updateStatistics();
        suspendedGame = true;
        setTimeout(function() {
@@ -182,22 +194,22 @@ let blinkElement = (elementId) => {
 
   setTimeout(function() {
     element.classList.add("hide-element");
-    console.log("part 0");
+    console.log("element hiden");
 }, 500);
 
   setTimeout(function() {
     element.classList.remove("hide-element");
-    console.log("part 1");
+    console.log("element shown");
 }, 1000);
 
 setTimeout(function() {
   element.classList.add("show-element");
-      console.log("part 2");
+      console.log("element hiden");
 }, 1500);
 
 setTimeout(function() {
   element.classList.remove("hide-element");
-      console.log("part 3");
+      console.log("element shown");
 }, 2000);
 
 }
