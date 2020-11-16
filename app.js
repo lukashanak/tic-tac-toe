@@ -189,6 +189,8 @@ function resetGame() {
 }
 
 
+
+/* NOT WORKING YET 
 let blinkElement = (elementId) => {
   let element = document.getElementById(elementId);
 
@@ -221,3 +223,5 @@ function blinkSubElements(elementId) {
   let element = document.getElementById(elementId);
   element.classList.add("hide-element");
 }
+
+*/

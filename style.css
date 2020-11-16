@@ -31,6 +31,21 @@ background-color: var(--main-bg-color);
   text-align: center;
 }
 
+@media (max-height: 750px) {
+  #gaming-table td {
+    width: 155px;
+    height: 155px;
+  }
+}
+
+@media (max-height: 650px) {
+  #gaming-table td {
+    width: 115px;
+    height: 115px;
+  }
+}
+
+
 .border-right {
   border-right: 4px solid var(--main-color);
 }
@@ -98,3 +113,4 @@ background-color: var(--main-bg-color);
 .hide-element {
   display: none;
 }
+
